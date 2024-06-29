@@ -6,13 +6,15 @@ import { ethers } from 'ethers';
 import {
   getDefaultConfig,
   RainbowKitProvider,
-  ConnectButton,
+  ConnectButton as RainbowConnectButton,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
+import { motion } from 'framer-motion';
+import '@/app/globals.css'
 
 const baseLlamaNodes = {
   id: 8453,
@@ -130,38 +132,70 @@ export default function UniqueIdPage() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-              <h1 className="text-2xl font-bold mb-4">Link Details</h1>
-              <div className="mb-4">
-                <label className="block text-gray-700">Wallet Address:</label>
-                <div className="text-gray-900">{linkData.walletAddress}</div>
+          <motion.div 
+          id='raysBackground'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className={`min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500`}
+          >
+            <div className="bg-gray-400 p-8 rounded-lg w-full max-w-lg backdrop-filter backdrop-blur-lg shadow-2xl bg-opacity-20">
+              <h1 className="text-3xl font-bold mb-6 text-center text-gray-200">Link Details</h1>
+              <div className="space-y-4">
+                <motion.div 
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="p-4 bg-gray-100 rounded-md"
+                >
+                  <label className="block text-gray-600">Wallet Address:</label>
+                  <div className="text-gray-900 font-mono">{linkData.walletAddress}</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="p-4 bg-gray-100 rounded-md"
+                >
+                  <label className="block text-gray-600">Amount:</label>
+                  <div className="text-gray-900 font-mono">{linkData.amount}</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="p-4 bg-gray-100 rounded-md"
+                >
+                  <label className="block text-gray-600">Chain Details:</label>
+                  <div className="text-gray-900 font-mono">{linkData.chainDetails}</div>
+                </motion.div>
+                <motion.div 
+                  initial={{ scale: 0.5 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="p-4 bg-gray-100 rounded-md"
+                >
+                  <label className="block text-gray-600">Unique ID:</label>
+                  <div className="text-gray-900 font-mono">{linkData.uniqueId}</div>
+                </motion.div>
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Amount:</label>
-                <div className="text-gray-900">{linkData.amount}</div>
+              <div className="mt-6 flex justify-center">
+                <RainbowConnectButton className="bg-gradient-to-r from-blue-400 to-purple-600 text-white px-6 py-2 rounded-md shadow-md hover:shadow-lg transform hover:scale-105 transition-transform">
+                  Connect Wallet
+                </RainbowConnectButton>
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Chain Details:</label>
-                <div className="text-gray-900">{linkData.chainDetails}</div>
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Unique ID:</label>
-                <div className="text-gray-900">{linkData.uniqueId}</div>
-              </div>
-              <div>
-                <ConnectButton />
-              </div>
-              <div className="mt-4">
-                <button
+              <div className="mt-4 text-center">
+                <motion.button 
                   onClick={handleTransfer}
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  initial={{ scale: 0.9 }}
+                  whileHover={{ scale: 1 }}
+                  className="bg-gradient-to-r from-green-400 to-blue-500 text-white px-6 py-2 rounded-md shadow-md hover:shadow-lg transform hover:scale-105 transition-transform"
                 >
                   Transfer
-                </button>
+                </motion.button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

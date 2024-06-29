@@ -31,3 +31,45 @@ body {
     text-wrap: balance;
   }
 }
+
+
+/* UniqueIdPage.module.css */
+#raysBackground {
+  background: linear-gradient(45deg, rgba(59, 130, 246, 0.1) 0%, rgba(107, 246, 246, 0.2) 20%, rgba(59, 130, 246, 0.1) 100%);
+  animation: raysSlide 4s linear infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+#glareLine {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 200%; /* Increase height to cover the entire background */
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  ); /* Use a gradient for a more dynamic glare effect */
+  animation: moveGlare 5s linear infinite; /* Adjust animation timing */
+}
+
+@keyframes moveGlare {
+  0% {
+    transform: translate(-50%, -50%); /* Start from top-left */
+  }
+  100% {
+    transform: translate(150%, 150%); /* Move to bottom-right */
+  }
+}
+
+@keyframes raysSlide {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000% 0;
+  }
+}
